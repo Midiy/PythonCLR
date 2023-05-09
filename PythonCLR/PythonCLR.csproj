@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PythonCLR.Core\PythonCLR.Core.csproj" />
+  </ItemGroup>
+
 </Project>
