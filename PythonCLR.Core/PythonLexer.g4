@@ -103,16 +103,16 @@ StringLiteral
  | '"""' ( StringEscape | ~'\\' )* '"""'
  ;
 
+NumberLiteral 
+ : IntLiteral
+ | FloatLiteral
+ ;
+
 IntLiteral : SignedIntNumber ;
 
 FloatLiteral 
  : DotFloatLiteral 
  | ExpFloatLiteral
- ;
-
-NumberLiteral 
- : IntLiteral
- | FloatLiteral
  ;
 
 BoolLiteral : True | False ;
