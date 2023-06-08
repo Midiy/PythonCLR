@@ -70,7 +70,8 @@ namespace PythonCLR.Core.Visitors
             AssemblyBuilderState assemblyBuilderState = AssemblyBuilderStateContext.GetCurrentState();
             ILGenerator generator = assemblyBuilderState.GetCurrentMethodGenerator();
 
-            foreach (PythonParser.MulOrDivOperatorContext operatorContext in context.mulOrDivOperator() ?? Array.Empty<PythonParser.MulOrDivOperatorContext>())
+            // Меняем направление, потому что множители мы на стек кладём в прямом порядке, поэтому вынимать их (и, соответственно, применять операции) надо в обратном.
+            foreach (PythonParser.MulOrDivOperatorContext operatorContext in context.mulOrDivOperator().Reverse() ?? Array.Empty<PythonParser.MulOrDivOperatorContext>())
                 generator.Emit(operatorContext.Mul() is not null ? OpCodes.Mul : OpCodes.Div);
 
             return result;
@@ -83,7 +84,8 @@ namespace PythonCLR.Core.Visitors
             AssemblyBuilderState assemblyBuilderState = AssemblyBuilderStateContext.GetCurrentState();
             ILGenerator generator = assemblyBuilderState.GetCurrentMethodGenerator();
 
-            foreach (PythonParser.AddOrSubOperatorContext operatorContext in context.addOrSubOperator() ?? Array.Empty<PythonParser.AddOrSubOperatorContext>())
+            // Меняем направление, потому что слагаемые мы на стек кладём в прямом порядке, поэтому вынимать их (и, соответственно, применять операции) надо в обратном.
+            foreach (PythonParser.AddOrSubOperatorContext operatorContext in context.addOrSubOperator().Reverse() ?? Array.Empty<PythonParser.AddOrSubOperatorContext>())
                 generator.Emit(operatorContext.Add() is not null ? OpCodes.Add : OpCodes.Sub);
 
             return result;

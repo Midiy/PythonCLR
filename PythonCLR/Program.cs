@@ -9,7 +9,7 @@ namespace PythonCLR
         {
             string code =
                 """
-                print("abc")
+                print(2 + 3 * 4 - 5)
 
                 """;
 
